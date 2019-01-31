@@ -1,5 +1,5 @@
 # swift4-json-sample
 
-An App that fetch the data from given URL when doing Pull to Refresh in UItableview.
+A sample iOS application that fetch the data from url and display in UItableview with images
 
 
