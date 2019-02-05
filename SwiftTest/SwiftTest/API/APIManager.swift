@@ -8,6 +8,7 @@
 
 import Foundation
 import SystemConfiguration
+import Alamofire
 
 class APIManager {  
     let stubDataURL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
@@ -32,29 +33,20 @@ class APIManager {
 
 extension APIManager {
     private func getJSONFromURL(urlString: String, completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
-        guard let url = URL(string: urlString) else {
-            print("Error: Cannot create URL from string")
-            return
-        }
-        let urlRequest = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
-            guard error == nil else {
-                print("Error calling api")
-                return completion(nil, error)
-            }
-            guard let responseData = data else {
-                print("Data is nil")
-                return completion(nil, error)
-            }
-            
-            let convertedString = String(data: responseData, encoding: String.Encoding.isoLatin1)!
-//            print("string \(convertedString)")
-            
-            let newdata = Data(convertedString.utf8)
 
-            completion(newdata, nil)
+        
+        Alamofire.request(urlString, method: .get).responseJSON { response in
+            let result = response.data
+            let convertedString = String(data: response.data!, encoding: String.Encoding.isoLatin1)!
+            //            print("string \(convertedString)")
+            
+                        let newdata = Data(convertedString.utf8)
+            
+                        completion(newdata, nil)
+
+            print(result!)
         }
-        task.resume()
+
     }
     
     private func createRowObjectWith(json: Data, completion: @escaping (_ data: Swifter?, _ error: Error?) -> Void) {

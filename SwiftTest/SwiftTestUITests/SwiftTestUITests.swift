@@ -7,8 +7,12 @@
 //
 
 import XCTest
+import UIKit
+@testable import SwiftTest
 
 class SwiftTestUITests: XCTestCase {
+    var viewController: ViewController!
+
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,6 +24,12 @@ class SwiftTestUITests: XCTestCase {
         XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        viewController = (storyboard.instantiateInitialViewController()  as! ViewController)
+        UIApplication.shared.keyWindow!.rootViewController = viewController
+        
+        XCTAssertNotNil(viewController.view)
+
     }
 
     override func tearDown() {
@@ -31,4 +41,15 @@ class SwiftTestUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    func testGetFirstRow() {
+        let testcollectionView = viewController.collectionView!
+        let indexPath0 = IndexPath(item: 0, section: 0)
+        
+        let cell0 = testcollectionView.cellForItem(at: indexPath0)
+        
+        _ = testcollectionView.indexPathsForVisibleItems
+        XCTAssert(testcollectionView.indexPathsForVisibleItems.contains(indexPath0)) // PASSED
+        
+        XCTAssert(cell0 != nil)     // FAILED
+    }
 }
