@@ -43,10 +43,6 @@ extension Rows: Codable {
         }else{
             imageHref = ""
         }
-
-//        description = try values.decodeIfPresent(String.self, forKey: .description)!
-      //  imageHref = try values.decode(String.self, forKey: .imageHref)
-        
     }
     
     func encode(to encoder: Encoder) throws {

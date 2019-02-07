@@ -21,11 +21,9 @@ class CategoryCell: UICollectionViewCell{
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.backgroundColor = UIColor.white
         let bcolor : UIColor = UIColor( red: 0.2, green: 0.2, blue:0.2, alpha: 0.3 )
-        
         self.layer.borderColor = bcolor.cgColor
         self.layer.borderWidth = 0.5
         self.layer.cornerRadius = 3
-
         setupViews()
     }
     
@@ -43,12 +41,11 @@ class CategoryCell: UICollectionViewCell{
         rowTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         rowTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         rowTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        
+
         contentView.addSubview(rowDescLabel)
         rowDescLabel.topAnchor.constraint(equalTo: rowTitleLabel.bottomAnchor, constant: 10).isActive = true
         rowDescLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         rowDescLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        
 
         contentView.addSubview(rowImageView)
         rowImageView.topAnchor.constraint(equalTo: rowDescLabel.bottomAnchor, constant: 10).isActive = true
@@ -67,7 +64,6 @@ class CategoryCell: UICollectionViewCell{
         rowTitleLabel.numberOfLines = 0
         rowTitleLabel.textAlignment = NSTextAlignment.center
         rowTitleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
-
         rowTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         return rowTitleLabel
     }()
@@ -82,8 +78,6 @@ class CategoryCell: UICollectionViewCell{
     
     let rowImageView: UIImageView = {
         let rowImageView = UIImageView()
-        rowImageView.image = UIImage(named: "no-image-icon-23494")
-        
         rowImageView.translatesAutoresizingMaskIntoConstraints = false
         return rowImageView
     }()
